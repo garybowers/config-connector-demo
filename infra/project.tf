@@ -13,7 +13,7 @@ resource "random_integer" "project_salt" {
   min = 100000
   max = 999999
 }
-
+/*
 resource "google_project" "cymbal-infra-project" {
   provider            = google.core
   name                = "cloud-dev-cymbal-coffee"
@@ -22,9 +22,10 @@ resource "google_project" "cymbal-infra-project" {
   folder_id           = var.folder_id
   billing_account     = var.billing_account
 }
+*/
 
 resource "google_project_service" "project_apis" {
-  project = google_project.cymbal-infra-project.project_id
+  project = var.project_id
   count   = length(var.services)
   service = element(var.services, count.index)
 

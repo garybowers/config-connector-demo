@@ -14,26 +14,26 @@ resource "random_id" "postfix" {
 }
 
 resource "google_service_account" "service_account" {
-  project      = google_project.cymbal-infra-project.project_id
+  project      = var.project_id
   account_id   = "${var.prefix}-cluster-${random_id.postfix.hex}"
   display_name = "${var.prefix}-cluster-${random_id.postfix.hex}"
 }
 
 // setup IAM for logging
 resource "google_project_iam_member" "service_account_log_writer" {
-  project = google_project.cymbal-infra-project.project_id
+  project = var.project_id
   role    = "roles/logging.logWriter"
   member  = "serviceAccount:${google_service_account.service_account.email}"
 }
 
 resource "google_project_iam_member" "service_account_metric_writer" {
-  project = google_project.cymbal-infra-project.project_id
+  project = var.project_id
   role    = "roles/monitoring.metricWriter"
   member  = "serviceAccount:${google_service_account.service_account.email}"
 }
 
 resource "google_project_iam_member" "service_account_monitoring_viewer" {
-  project = google_project.cymbal-infra-project.project_id
+  project = var.project_id
   role    = "roles/monitoring.viewer"
   member  = "serviceAccount:${google_service_account.service_account.email}"
 }
@@ -42,7 +42,7 @@ resource "google_project_iam_member" "service_account_monitoring_viewer" {
 // setup GKE firewall rules
 
 resource "google_compute_firewall" "egress-allow-gke-node" {
-  project = google_project.cymbal-infra-project.project_id
+  project = var.project_id
   network = google_compute_network.vpc-network.self_link
 
   name = "${var.prefix}-gke-node-allow-egress-${random_id.postfix.hex}"
@@ -60,7 +60,7 @@ resource "google_compute_firewall" "egress-allow-gke-node" {
 }
 
 resource "google_compute_firewall" "ingress-allow-gke-node" {
-  project = google_project.cymbal-infra-project.project_id
+  project = var.project_id
   network = google_compute_network.vpc-network.self_link
 
   name = "${var.prefix}-gke-node-allow-ingress-${random_id.postfix.hex}"
@@ -82,7 +82,7 @@ resource "google_compute_firewall" "ingress-allow-gke-node" {
 resource "google_container_cluster" "cluster" {
   provider = google-beta
 
-  project  = google_project.cymbal-infra-project.project_id
+  project  = var.project_id
   name     = "${var.prefix}-cluster-${random_id.postfix.hex}"
   location = var.region
 
@@ -115,7 +115,7 @@ resource "google_container_cluster" "cluster" {
   }
 
   workload_identity_config {
-    workload_pool = "${google_project.cymbal-infra-project.project_id}.svc.id.goog"
+    workload_pool = "${var.project_id}.svc.id.goog"
 
   }
 
@@ -146,7 +146,7 @@ resource "google_container_cluster" "cluster" {
 
 resource "google_container_node_pool" "nodepools" {
   provider = google-beta
-  project  = google_project.cymbal-infra-project.project_id
+  project  = var.project_id
 
   cluster     = google_container_cluster.cluster.name
   location    = var.region
@@ -174,7 +174,7 @@ resource "google_container_node_pool" "nodepools" {
       enable_integrity_monitoring = true
     }
     service_account = google_service_account.service_account.email
-    oauth_scopes    = [
+    oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform"
     ]
   }

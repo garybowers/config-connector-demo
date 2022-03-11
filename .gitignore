@@ -2,4 +2,4 @@
 infra/.terraform
 *.swp
 *.hcl
-
+terraform.tfstate*

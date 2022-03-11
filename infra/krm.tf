@@ -16,13 +16,13 @@
 */
 
 resource "google_service_account" "service_account_cnrm" {
-  project      = google_project.cymbal-infra-project.project_id
+  project      = var.project_id
   account_id   = "${var.prefix}-cnrm-${random_id.postfix.hex}"
   display_name = "${var.prefix}-cnrm-${random_id.postfix.hex}"
 }
 
 resource "google_project_iam_binding" "cnrm-project-0" {
-  project = google_project.cymbal-infra-project.project_id
+  project = var.project_id
   role    = "roles/owner"
 
   members = [
@@ -32,10 +32,10 @@ resource "google_project_iam_binding" "cnrm-project-0" {
 
 // Allow workload identitiy access to use the service account in the pool.
 resource "google_project_iam_binding" "cnrm-project-1" {
-  project = google_project.cymbal-infra-project.project_id
+  project = var.project_id
   role    = "roles/iam.workloadIdentityUser"
 
   members = [
-    "serviceAccount:${google_project.cymbal-infra-project.project_id}.svc.id.goog[cnrm-system/cnrm-controller-manager]",
+    "serviceAccount:${var.project_id}.svc.id.goog[cnrm-system/cnrm-controller-manager]",
   ]
 }

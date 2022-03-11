@@ -9,6 +9,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+variable "project_id" {
+  type        = string
+  description = "The project to deploy the resources to."
+}
+
 variable "folder_id" {
   type        = string
   description = "The folder to deploy the projects to."

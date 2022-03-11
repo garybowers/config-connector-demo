@@ -11,13 +11,13 @@
 
 resource "google_compute_network" "vpc-network" {
   name                    = "network-1"
-  project                 = google_project.cymbal-infra-project.project_id
+  project                 = var.project_id
   auto_create_subnetworks = false
 }
 
 resource "google_compute_subnetwork" "consumer-subnet" {
   name                     = "subnet-euw2"
-  project                  = google_project.cymbal-infra-project.project_id
+  project                  = var.project_id
   region                   = var.region
   network                  = google_compute_network.vpc-network.id
   private_ip_google_access = true
@@ -26,7 +26,7 @@ resource "google_compute_subnetwork" "consumer-subnet" {
 
 resource "google_compute_router" "nat_router" {
   name    = "${var.prefix}-nat-rtr"
-  project = google_project.cymbal-infra-project.project_id
+  project = var.project_id
   region  = var.region
   network = google_compute_network.vpc-network.self_link
 
@@ -36,7 +36,7 @@ resource "google_compute_router" "nat_router" {
 }
 
 resource "google_compute_router_nat" "nat_gateway" {
-  project = google_project.cymbal-infra-project.project_id
+  project = var.project_id
   name    = "${var.prefix}-nat-gw"
   router  = google_compute_router.nat_router.name
   region  = var.region
