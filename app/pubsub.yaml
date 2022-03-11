@@ -1,0 +1,52 @@
+---
+apiVersion: serviceusage.cnrm.cloud.google.com/v1beta1
+kind: Service
+metadata:
+  name: pubsub.googleapis.com
+spec:
+  projectRef:
+    external: projects/cymbal-coffee-infra-867184
+---
+apiVersion: pubsub.cnrm.cloud.google.com/v1beta1
+kind: PubSubTopic
+metadata:
+  labels:
+    label-one: "value-one"
+  name: dev1-connoisseur-service-event
+spec:
+  resourceID: dev1-connoisseur-service-event
+---
+apiVersion: pubsub.cnrm.cloud.google.com/v1beta1
+kind: PubSubTopic
+metadata:
+  labels:
+    label-one: "value-one"
+  name: dev1-order-service-event
+spec:
+  resourceID: dev1-order-service-event
+---
+apiVersion: pubsub.cnrm.cloud.google.com/v1beta1
+kind: PubSubSubscription
+metadata:
+  labels:
+    label-one: "value-one"
+  name: dev1-push-connoisseur-to-order
+spec:
+  ackDeadlineSeconds: 15
+  messageRetentionDuration: 86400s
+  retainAckedMessages: false
+  topicRef:
+    name: dev1-connoisseur-service-event 
+---
+apiVersion: pubsub.cnrm.cloud.google.com/v1beta1
+kind: PubSubSubscription
+metadata:
+  labels:
+    label-one: "value-one"
+  name: dev1-push-order-to-connoisseur
+spec:
+  ackDeadlineSeconds: 15
+  messageRetentionDuration: 86400s
+  retainAckedMessages: false
+  topicRef:
+    name: dev1-order-service-event 

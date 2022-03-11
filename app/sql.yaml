@@ -1,0 +1,21 @@
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLDatabase
+metadata:
+  labels:
+    app: cymbal-coffee 
+  name: dev1-cymbal-coffee-db 
+spec:
+  charset: utf8mb4
+  collation: utf8mb4_bin
+  instanceRef:
+    name: dev1-cymbal-coffee
+---
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLInstance
+metadata:
+  name: dev1-cymbal-coffee-1
+spec:
+  region: europe-west2 
+  databaseVersion: MYSQL_5_7
+  settings:
+    tier: db-n1-standard-1
