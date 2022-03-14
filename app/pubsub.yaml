@@ -3,6 +3,8 @@ apiVersion: serviceusage.cnrm.cloud.google.com/v1beta1
 kind: Service
 metadata:
   name: pubsub.googleapis.com
+  annotations:
+    cnrm.cloud.google.com/deletion-policy: abandon
 spec:
   projectRef:
     external: projects/cymbal-coffee-infra-867184

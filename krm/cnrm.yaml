@@ -7,7 +7,7 @@ metadata:
   name: configconnector.core.cnrm.cloud.google.com
 spec:
   mode: cluster
-  googleServiceAccount: "test-cnrm-329ee86f@cymbal-coffee-infra-867184.iam.gserviceaccount.com"
+  googleServiceAccount: "bean-dev-cnrm-8ea01bf0@cymbal-coffee-infra-867184.iam.gserviceaccount.com"
 ---
 apiVersion: v1
 kind: Namespace

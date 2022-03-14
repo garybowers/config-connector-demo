@@ -84,7 +84,7 @@ resource "google_container_cluster" "cluster" {
 
   project  = var.project_id
   name     = "${var.prefix}-cluster-${random_id.postfix.hex}"
-  location = var.region
+  location = "${var.region}-b"
 
   network    = google_compute_network.vpc-network.name
   subnetwork = google_compute_subnetwork.consumer-subnet.name
@@ -149,7 +149,7 @@ resource "google_container_node_pool" "nodepools" {
   project  = var.project_id
 
   cluster     = google_container_cluster.cluster.name
-  location    = var.region
+  location    = "${var.region}-b"
   name_prefix = "${var.prefix}-np-"
 
   node_config {

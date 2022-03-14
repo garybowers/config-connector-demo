@@ -8,6 +8,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-project_id = "cymbal-coffee-infra-867184"
+project_id      = "cymbal-coffee-infra-867184"
 folder_id       = "994185999267"
 billing_account = "010901-486CFD-BF71D3"
+prefix          = "bean-dev"
+region          = "europe-west1"

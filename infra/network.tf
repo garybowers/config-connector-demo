@@ -10,13 +10,13 @@
 # limitations under the License.
 
 resource "google_compute_network" "vpc-network" {
-  name                    = "network-1"
+  name                    = "${var.prefix}-vpc"
   project                 = var.project_id
   auto_create_subnetworks = false
 }
 
 resource "google_compute_subnetwork" "consumer-subnet" {
-  name                     = "subnet-euw2"
+  name                     = "${var.prefix}-euw2"
   project                  = var.project_id
   region                   = var.region
   network                  = google_compute_network.vpc-network.id
