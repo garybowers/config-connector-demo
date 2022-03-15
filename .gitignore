@@ -2,5 +2,5 @@
 infra/.terraform
 *.swp
 *.hcl
-terraform.tfstate*
+infra/terraform.tfstate*
 */terraform.tfstate*

@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cymbal-prod 
+  annotations:
+    cnrm.cloud.google.com/project-id: cymbal-coffee-infra-867184
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cymbal-dev 
+  annotations:
+    cnrm.cloud.google.com/project-id: cymbal-coffee-infra-867184

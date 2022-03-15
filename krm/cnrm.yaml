@@ -8,17 +8,3 @@ metadata:
 spec:
   mode: cluster
   googleServiceAccount: "bean-dev-cnrm-8ea01bf0@cymbal-coffee-infra-867184.iam.gserviceaccount.com"
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: cymbal-prod 
-  annotations:
-    cnrm.cloud.google.com/project-id: cymbal-coffee-infra-867184
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: cymbal-dev 
-  annotations:
-    cnrm.cloud.google.com/project-id: cymbal-coffee-infra-867184
