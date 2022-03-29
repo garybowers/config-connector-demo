@@ -36,9 +36,9 @@ Run `kubectl apply -f krm/cnrm.yaml`
 
 Reconilliation occurs every 10 minutes
 
-~~Get resources deployed~~ `kubectl get gcp -n <NAMESPACE>`
+**Get resources deployed** `kubectl get gcp -n <NAMESPACE>`
 
-~~Tail reconcilliation logs~~ `kubectl logs cnrm-controller-manager-0 -n
+**Tail reconcilliation logs** `kubectl logs cnrm-controller-manager-0 -n
 cnrm-system manager -f`
 
 Delete some resources in pantheon and then force a reconciliation by `kubectl

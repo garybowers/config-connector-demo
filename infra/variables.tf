@@ -38,5 +38,5 @@ variable "prefix" {
 
 variable "services" {
   description = "list of services to enable in the porject"
-  default     = ["container.googleapis.com", "serviceusage.googleapis.com", "sqladmin.googleapis.com"]
+  default     = ["container.googleapis.com", "serviceusage.googleapis.com"]
 }

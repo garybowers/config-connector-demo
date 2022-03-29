@@ -1,4 +1,14 @@
 ---
+apiVersion: serviceusage.cnrm.cloud.google.com/v1beta1
+kind: Service
+metadata:
+  name: storage.googleapis.com
+  annotations:
+    cnrm.cloud.google.com/deletion-policy: delete 
+spec:
+  projectRef:
+    external: projects/cymbal-coffee-infra-867184
+---
 apiVersion: storage.cnrm.cloud.google.com/v1beta1
 kind: StorageBucket
 metadata:
@@ -16,6 +26,7 @@ spec:
         age: 7
   versioning:
     enabled: true
+  location: europe-west1
   cors:
     - origin: ["http://example.appspot.com"]
       responseHeader: ["Content-Type"]

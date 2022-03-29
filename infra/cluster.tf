@@ -154,10 +154,10 @@ resource "google_container_node_pool" "nodepools" {
 
   node_config {
     image_type   = "COS_CONTAINERD"
-    machine_type = "e2-medium"
+    machine_type = "e2-standard-4"
 
     disk_size_gb = 80
-    disk_type    = "pd-balanced"
+    disk_type    = "pd-ssd"
 
     preemptible = false
 
